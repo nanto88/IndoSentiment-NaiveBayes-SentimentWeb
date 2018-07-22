@@ -4,9 +4,6 @@
 .setting {
   display: none;
 }
-.advanced {
-  display: none;
-}
 .text-light a {
   color: #f8f9fa;
 }
@@ -55,7 +52,6 @@ h1 {
   width: 100%;
   height: 100px;
   font-family: sans-serif;
-  margin: 0 auto;
   position: absolute;
   bottom: 0;
 }
@@ -70,3 +66,22 @@ h1 {
     margin-bottom: 3px;
     color: rgb(126, 126, 126);
 }
+
+/* #footer-sentiment {
+  background-color: rgb(245, 245, 245);
+  width: 100%;
+  height: 100px;
+  font-family: sans-serif;
+  position: relative;
+}
+#footer-sentiment #wrapper-footer {
+  padding-top: 15px;
+}
+#footer-sentiment a {
+  margin-right: 15px;
+  color: rgba(224, 57, 74, 0.9);
+}
+#footer-sentiment p {
+    margin-bottom: 3px;
+    color: rgb(126, 126, 126);
+} */

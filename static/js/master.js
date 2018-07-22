@@ -1,7 +1,6 @@
-// $(".setting").hide();
-// $(".advanced").hide();
 $(document).ready(function(){
-
+    // $(".setting").hide();
+    $(".advanced").hide();
     var d = new Date();
     d.setDate(d.getDate() - 6);
 
@@ -20,20 +19,12 @@ $(document).ready(function(){
 
     $(".toggle").click(function(){
       $(".setting").fadeToggle('ease')
-
-      // $(".text-muted").text(function(_,txt){
-      //   var newtxt = "";
-      //   if ( txt == "<i class='fa fa-caret-right'></i> Set Daterange") {
-      //     newtxt = "<i class='fa fa-caret-right'></i> Set Pencarian Terbaru";
-      //   }
-      //   else {
-      //     newtxt = "<i class='fa fa-caret-right'></i> Set Daterange"
-      //   }
-      //   return newtxt;
-      // });
-      // return false;
-
+      // $(".setting").fadeToggle(function(){
+      //   $(".setting").css({"display": "inline-block"})
+      // })
+      // $(".setting").css({"display": "inline-block"})
       $("i").toggleClass("fa-caret-right fa-caret-down")
+
 
     });
     $(".checkbox").change(function(){
