@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link rel="stylesheet" href="../static/css/master.css">
+    <title>Sentiment - Indo Sentiment</title>
+  </head>
+
+  <body>
+    <!-- set waktu loading -->
+    {% set w1 = t() %}
+    <div class="container">
+        <h1 class="logo text-center"><a href="/">Indo Sentiment</a></h1>
+      <div class="form-group">
+
+        <form action="/sentiment" method="POST">
+          <div class="row justify-content-center form-group">
+
+            <div class="col-9 col-md-5 col-sm-8 p-0 m-0">
+              <input class="form-control" type="text" name="query" value="{{ cleanquery(query) }}" placeholder="Cari Sentiment Pilgub Jabar dari Twitter.." required>
+              <div class="row justify-content-left form-group">
+                <div class="col-11 col-sm-10 col-md-7 col-lg-7">
+                  <div class="form-group">
+                    <div class="toggle">
+                      <a href="#" class="text-muted"><i class="fa fa-caret-right"></i> Settings</a>
+                    </div>
+                    <div class="setting">
+                      <input class="form-control date" type="text" name="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy"/>
+                        <label class="text-muted"><input class="checkbox" type="checkbox" name="checkbox" value="checkbox"> Set Pencarian Tweet Terbaru</label>
+                        <label class="text-muted"><input class="retweet" type="checkbox" name="nort" value="nort"> Set Pencarian Tanpa Retweet</label>
+                        <div class="toggle2">
+                          <a href="#" class="text-muted"><i class="iconadv fa fa-angle-double-right"></i> Advanced Settings</a>
+                        </div>
+                          <div class="advanced">
+                            <label class="text-muted"><input class="stemmer" type="checkbox" name="stem" value="stem"> Set Predict Sentiment dengan Stemming <span class="font-italic">(Library Sastrawi)</span></label>
+                          </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-2 col-md-1 col-sm-2 p-0 m-0">
+              <button class="btn btn-light form-control" type="submit" value="submit">
+                <span class="fa fa-search"></span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div id="pie" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+      <div class="bg-light">
+        <div class="container">
+          <p class="text-muted p-3"><span class="fa fa-info"></span>
+            Grafik bisa disimpan dengan mengklik menu pada kanan atas grafik
+          </p>
+        </div>
+      </div>
+      <!-- set penghitung sentiment -->
+      {% set counter = {
+        'pos': 0,
+        'neg': 0,
+        'net': 0
+      } %}
+      <!-- set macro untuk increment sentiment -->
+      {% macro increment(dct, key, inc=1)%}
+        {% if dct.update({key: dct[key] + inc}) %} {% endif %}
+      {% endmacro %}
+
+      <div class="bg-light">
+        <div class="container">
+          <p class="text-muted p-3"><span class="fa fa-info"></span>
+            Model Data Train menggunakan data tweet mengenai politik pilgub jawa barat 2018. Prediksi sangat baik pada tweet mengenai politik
+          </p>
+        </div>
+      </div>
+      <blockquote class="blockquote">
+        <footer class="blockquote-footer">Estimasi Loading Halaman <span id="est"></span> dari Total <span id="total"></span> Tweet</footer>
+      </blockquote>
+
+      <!-- loop tweet -->
+      {% for tweet in tweets %} {% set clean_tweet = clean(tweet.text) %} {% set predict = model.classify(clean_tweet) %}
+      <div class="card">
+        {% if predict == '0' %}
+        <div class="card-header bg-danger text-light">
+          {% elif predict == '1' %}
+          <div class="card-header bg-primary text-light">
+            {% elif predict == '2' %}
+            <div class="card-header text-secondary">
+              {% endif %}
+              <a target="_blank" rel="noopener noreferrer" href="http://twitter.com/{{tweet.user.screen_name}}">{{tweet.user.name}}</a>
+            </div>
+            <div class="card-body">
+              <!-- show tweet, tweer ver clean preprocess and predict -->
+              <div class="card-text">
+                <h5 class="card-title">
+                  Tweet
+                </h5>
+                <p>{{ tweet.text }}</p>
+                <h5 class="card-subtitle">
+                  Clean Tweet
+                </h5>
+                <p>{{ clean_tweet }}</p>
+                <!-- jika predict 0 = negatif, 1 = positif, 2 = netral
+                setiap predict diincrement ke variable dict utk visualisasi -->
+                <h5 class="card-subtitle">
+                  Predict
+                </h5>
+                {% if predict == '0' %}
+                <p>Negatif <br>
+                {{ increment(counter, 'neg') }}
+                {% elif predict == '1' %}
+                <p>Positif<br>
+                {{ increment(counter, 'pos') }}
+                {% elif predict == '2' %}
+                <p>Netral<br>
+                {{ increment(counter, 'net') }}
+                {% else %}
+                <p>Sentiment Undetected<br>
+                {% endif %}
+                <!-- probability -->
+                {% set prob_dist = model.prob_classify(clean_tweet) %}
+                {{ prob_dist.prob(predict) }}</p>
+              </div>
+            </div>
+          </div>
+          <br>
+          {% endfor %}
+          <!-- set estimasi loading halaman dari pembacaan model hingga halaman selesai memuat -->
+          {% set w2 = t() %}
+          {% set w3 = est+(w2-w1) %}
+          <!-- menghitung total tweet -->
+          {% set total = counter['pos']+counter['neg']+counter['net'] %}
+        </div>
+
+        <!-- <div id="footer position-fixed">
+          <div class="container text-center">
+            <div id="wrapper-footer">
+              <p>
+                  <> with <span class="fa fa-heart" style="color: rgb(224, 57, 74);"></span> for great people
+                    <br>© 2018 Indo Sentiment. All rights reserved
+                </p>
+                <a href="#"><span class="fa fa-github"></span> Github Project</a>
+                <a href="/about"><span class="fa fa-user-o"></span> About</a>
+            </div>
+
+          </div>
+        </div> -->
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <!-- <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+        <script src="{{ url_for('static', filename='js/master.js') }}"></script>
+        <!-- <script src="{{ url_for('static', filename='js/piechart.js') }}"></script> -->
+<script type="text/javascript">
+Highcharts.chart('pie', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Hasil Sentiment dari Tweet '+ $("input[name=query]").attr("value")
+
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Sentiment',
+        colorByPoint: true,
+        data: [{
+            name: 'Positif',
+            y: {{ counter['pos'] }},
+            sliced: true,
+            color: '#45B3E0',
+            selected: true
+        }, {
+            name: 'Negatif',
+            y: {{ counter['neg'] }},
+            color: '#DC3545'
+        }, {
+            name: 'Netral',
+            y: {{ counter['net'] }},
+            color: '#d6d6d6'
+        }]
+    }]
+});
+
+$("#est").html("(" + {{ w3 }} + "s)");
+$("#total").html({{ total }});
+</script>
+
+  </body>
+
+</html>

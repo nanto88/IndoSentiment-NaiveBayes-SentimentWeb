@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link rel="stylesheet" href="../static/css/master.css">
+    <title>Index - Indo Sentiment</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="align-middle">
+        <h1 class="logo mt-15 text-center"><a href="/">Indo Sentiment</a></h1>
+
+        <form action="/sentiment" method="POST">
+          <div class="row justify-content-center form-group">
+
+            <div class="col-9 col-md-5 col-sm-8 p-0 m-0">
+              <input class="form-control" type="text" name="query" placeholder="Cari Sentiment Pilgub Jabar dari Twitter.." required>
+              <div class="row justify-content-left form-group">
+                <div class="col-11 col-sm-10 col-md-7 col-lg-7">
+                  <div class="form-group">
+                    <div class="toggle">
+                      <a href="#" class="text-muted"><i class="fa fa-caret-right"></i> Settings</a>
+                    </div>
+                    <div class="setting">
+                      <input class="form-control date" type="text" name="daterange" value="" placeholder="mm/dd/yyyy - mm/dd/yyyy"/>
+                        <label class="text-muted"><input class="checkbox" type="checkbox" name="checkbox" value="checkbox"> Set Pencarian Tweet Terbaru</label>
+                        <label class="text-muted"><input class="retweet" type="checkbox" name="nort" value="nort"> Set Pencarian Tanpa Retweet</label>
+                        <div class="toggle2">
+                          <a href="#" class="text-muted"><i class="iconadv fa fa-angle-double-right"></i> Advanced Settings</a>
+                        </div>
+                          <div class="advanced">
+                            <label class="text-muted"><input class="stemmer" type="checkbox" name="stem" value="stem"> Set Predict Sentiment dengan Stemming <span class="font-italic">(Library Sastrawi)</span></label>
+                          </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-2 col-md-1 col-sm-2 p-0 m-0">
+              <button class="btn btn-light form-control" type="submit" value="submit">
+                <span class="fa fa-search"></span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+      <div id="footer">
+        <div class="container text-center">
+          <div id="wrapper-footer">
+            <p>
+                <> with <span class="fa fa-heart" style="color: rgb(224, 57, 74);"></span> for great people
+                  <br>© 2018 Indo Sentiment. All rights reserved
+              </p>
+              <a target="_blank" href="#"><span class="fa fa-github"></span> Github Project</a>
+              <a target="_blank" href="/about"><span class="fa fa-user-o"></span> About</a>
+          </div>
+
+        </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+      <script type="text/javascript" src="{{ url_for('static', filename='js/master.js') }}"></script>
+      <script type="text/javascript" src="../static/js/master.js"></script>
+  </body>
+
+</html>

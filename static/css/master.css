@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Bentham|Old+Standard+TT');
+
+
+.setting {
+  display: none;
+}
+.advanced {
+  display: none;
+}
+.text-light a {
+  color: #f8f9fa;
+}
+
+a.text-light:hover a, a.text-light:focus a {
+  color: #dae0e5;
+}
+
+.form-control:focus {
+  border-color: rgba(0, 136, 172, 0.3);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.mt-15 {
+  margin-top: 15%;
+}
+.logo a {
+  text-decoration: none;
+  color: rgb(54, 54, 54);
+}
+h1 {
+  font-family: 'Bentham', serif;
+}
+.about {
+  margin-top: 8%;
+}
+.about p {
+  color: rgba(0, 0, 0, 0.75);
+}
+.about p > a {
+  color: rgba(224, 57, 74, 0.9);
+}
+.about a:hover {
+  color: rgba(185, 36, 51, 0.9);
+}
+.about .back {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: rgba(0, 0, 0, 0.75);;
+}
+.about .back:hover {
+  color: rgba(224, 57, 74, 0.9);
+  cursor: pointer;
+}
+#footer {
+  background-color: rgb(245, 245, 245);
+  width: 100%;
+  height: 100px;
+  font-family: sans-serif;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
+}
+#footer #wrapper-footer {
+  padding-top: 15px;
+}
+#footer a {
+  margin-right: 15px;
+  color: rgba(224, 57, 74, 0.9);
+}
+#footer p {
+    margin-bottom: 3px;
+    color: rgb(126, 126, 126);
+}

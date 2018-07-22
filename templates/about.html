@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link rel="stylesheet" href="../static/css/master.css">
+    <title>About - Indo Sentiment</title>
+  </head>
+
+  <body>
+      <div class="container about">
+        <a href="/" class="back"><i class="fa fa-chevron-circle-left"></i></a>
+        <h1>Indo Sentiment</h1>
+        <p>Sebuah website pencarian tweet atau post social media dari <a target="_blank" rel="noopener noreferrer" href="http://twitter.com">Twitter</a> yang menampilkan tweet terbaru atau berdasarkan <a target="_blank" rel="noopener noreferrer" href="http://daterangepicker.com">Daterange</a> dan visualisasi <a target="_blank" rel="noopener noreferrer" href="http://highcharts.com">Pie Chart</a> dengan sentimentnya berupa positif, negatif dan netral.
+          Website ini dibuat menggunakan bahasa pemrograman <a target="_blank" rel="noopener noreferrer" href="http://python.com">Python</a> dengan perhitungan probabilitas sentiment menggunakan algoritma Naive Bayes dari library <a target="_blank" rel="noopener noreferrer" href="http://textblob.readthedocs.io">Textblob</a>, engine backend menggunakan library <a target="_blank" rel="noopener noreferrer" href="http://flask.pocoo.org">Flask</a>, Data API menggunakan
+          <a target="_blank" rel="noopener noreferrer" href="http://tweepy.org">Tweepy</a> dan option stemming menggunakan library <a href="https://github.com/har07/PySastrawi">Sastrawi</a>. Dataset ini menggunakan tweet mengenai pilgub jawa barat 2018, sehingga
+          website pencarian ini lebih mengutamakan sentiment mengenai politik.
+        </p>
+        <div class="text-center">
+          <br>
+          <p>
+            Feel free to collaborate or just say hello <br>
+            <a target="_blank" rel="noopener noreferrer" href="http://github.com/nanto88"><span class="fa fa-github"></span> github.com/nanto88</a> ~
+            <a target="_blank" rel="noopener noreferrer" href="http://twitter.com/nanto88"><span class="fa fa-twitter"></span> @nanto88</a>
+          </p>
+        </div>
+      </div>
+
+    <div id="footer">
+      <div class="container text-center">
+        <div id="wrapper-footer">
+          <p>
+              <> with <span class="fa fa-heart" style="color: rgb(224, 57, 74);"></span> for great people
+                <br>© 2018 Indo Sentiment. All rights reserved
+            </p>
+            <a target="_blank" href="#"><span class="fa fa-github"></span> Github Project</a>
+            <a target="_blank" href="/about"><span class="fa fa-user-o"></span> About</a>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
