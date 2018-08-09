@@ -17,6 +17,25 @@ $(document).ready(function(){
         });
 
 
+    $(".card").slice(0, 10).show();
+    $("#loadMore").on('click', function(event){
+      event.preventDefault();
+      $(".card:hidden").slice(0, 10).fadeIn('slow');
+      if ($(".card:hidden").length == 0) {
+        $("#loadMore").fadeOut('slow');
+      }
+    //   $("html, body").animate({
+    //     scrollTop: $(this).offset().top
+    //   }, 2000);
+    });
+
+    $('#toTop').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 2000, 'swing');
+        return false;
+    });
+
     $(".toggle").click(function(){
       $(".setting").fadeToggle('ease')
       // $(".setting").fadeToggle(function(){
@@ -41,8 +60,6 @@ $(document).ready(function(){
       $(".advanced").fadeToggle("ease")
       $(".iconadv").toggleClass("fa-angle-double-right fa-angle-double-down")
     });
-
-
 
 
 

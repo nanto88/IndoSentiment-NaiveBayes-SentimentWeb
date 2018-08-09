@@ -91,57 +91,64 @@
 
       <!-- loop tweet -->
       {% for tweet in tweets %} {% set clean_tweet = clean(tweet.text) %} {% set predict = model.classify(clean_tweet) %}
-      <div class="card">
-        {% if predict == '0' %}
-        <div class="card-header bg-danger text-light">
-          {% elif predict == '1' %}
-          <div class="card-header bg-primary text-light">
-            {% elif predict == '2' %}
-            <div class="card-header text-secondary">
-              {% endif %}
-              <a target="_blank" rel="noopener noreferrer" href="http://twitter.com/{{tweet.user.screen_name}}">{{tweet.user.name}}</a>
-            </div>
-            <div class="card-body">
-              <!-- show tweet, tweer ver clean preprocess and predict -->
-              <div class="card-text">
-                <h5 class="card-title">
-                  Tweet
-                </h5>
-                <p>{{ tweet.text }}</p>
-                <h5 class="card-subtitle">
-                  Clean Tweet
-                </h5>
-                <p>{{ clean_tweet }}</p>
-                <!-- jika predict 0 = negatif, 1 = positif, 2 = netral
-                setiap predict diincrement ke variable dict utk visualisasi -->
-                <h5 class="card-subtitle">
-                  Predict
-                </h5>
-                {% if predict == '0' %}
-                <p>Negatif <br>
-                {{ increment(counter, 'neg') }}
-                {% elif predict == '1' %}
-                <p>Positif<br>
-                {{ increment(counter, 'pos') }}
-                {% elif predict == '2' %}
-                <p>Netral<br>
-                {{ increment(counter, 'net') }}
-                {% else %}
-                <p>Sentiment Undetected<br>
+        <div class="card">
+          {% if predict == '0' %}
+          <div class="card-header bg-danger text-light">
+            {% elif predict == '1' %}
+            <div class="card-header bg-primary text-light">
+              {% elif predict == '2' %}
+              <div class="card-header text-secondary">
                 {% endif %}
-                <!-- probability -->
-                {% set prob_dist = model.prob_classify(clean_tweet) %}
-                {{ prob_dist.prob(predict) }}</p>
+                <a target="_blank" rel="noopener noreferrer" href="http://twitter.com/{{tweet.user.screen_name}}">{{tweet.user.name}}</a>
+              </div>
+              <div class="card-body">
+                <!-- show tweet, tweer ver clean preprocess and predict -->
+                <div class="card-text">
+                  <h5 class="card-title">
+                    Tweet
+                  </h5>
+                  <p>{{ tweet.text }}</p>
+                  <h5 class="card-subtitle">
+                    Clean Tweet
+                  </h5>
+                  <p>{{ clean_tweet }}</p>
+                  <!-- jika predict 0 = negatif, 1 = positif, 2 = netral
+                  setiap predict diincrement ke variable dict utk visualisasi -->
+                  <h5 class="card-subtitle">
+                    Predict
+                  </h5>
+                  {% if predict == '0' %}
+                  <p>Negatif <br>
+                  {{ increment(counter, 'neg') }}
+                  {% elif predict == '1' %}
+                  <p>Positif<br>
+                  {{ increment(counter, 'pos') }}
+                  {% elif predict == '2' %}
+                  <p>Netral<br>
+                  {{ increment(counter, 'net') }}
+                  {% else %}
+                  <p>Sentiment Undetected<br>
+                  {% endif %}
+                  <!-- probability -->
+                  {% set prob_dist = model.prob_classify(clean_tweet) %}
+                  {{ prob_dist.prob(predict) }}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <br>
-          {% endfor %}
-          <!-- set estimasi loading halaman dari pembacaan model hingga halaman selesai memuat -->
-          {% set w2 = t() %}
-          {% set w3 = est+(w2-w1) %}
-          <!-- menghitung total tweet -->
-          {% set total = counter['pos']+counter['neg']+counter['net'] %}
+            <!-- <br> -->
+            {% endfor %}
+            <!-- menghitung total tweet -->
+            {% set total = counter['pos']+counter['neg']+counter['net'] %}
+<!-- container -->
+        </div>
+
+        <div class="container">
+          <button type="button" name="load" id="loadMore" class="btn btn-block btn-outline-warning">
+            Load More (10)
+          </button>
+
+          <button type="button" name="top" id="toTop" class="btn btn-block btn-outline-warning">
+            <span class="fa fa-arrow-circle-up fa-2x"></span>
         </div>
 
           <div id="footer" class="position-static">
@@ -156,6 +163,9 @@
               </div>
 
             </div>
+            <!-- set estimasi loading halaman dari pembacaan model hingga halaman selesai memuat -->
+            {% set w2 = t() %}
+            {% set w3 = est+(w2-w1)+6 %}
           </div>
 
 
