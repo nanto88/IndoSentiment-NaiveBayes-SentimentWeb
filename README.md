@@ -5,4 +5,5 @@ Sebuah website pencarian tweet atau post social media dari [Twitter](http://twit
 ), Data API menggunakan [Tweepy](http://tweepy.org) dan option stemming menggunakan library [Sastrawi](https://github.com/har07/PySastrawi). Dataset ini menggunakan tweet mengenai pilgub jawa barat 2018, sehingga website pencarian ini lebih mengutamakan sentiment mengenai politik.
 
 *visit : ~~http://www.indosentiment.com~~ https://indo-sentiment.herokuapp.com/*
-*please refresh if return application error page when searching sentiment
+
+*please refresh if return application error page when searching sentiment*
