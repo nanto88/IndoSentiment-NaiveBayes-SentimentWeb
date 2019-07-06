@@ -6,4 +6,4 @@ Sebuah website pencarian tweet atau post social media dari [Twitter](http://twit
 
 *visit : ~~http://www.indosentiment.com~~ https://indo-sentiment.herokuapp.com/*
 
-*please refresh if return application error page when searching sentiment*
+*please refresh if return application error page while searching sentiment*
